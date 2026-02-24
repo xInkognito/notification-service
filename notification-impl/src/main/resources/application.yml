@@ -1,0 +1,25 @@
+  spring:
+    application:
+      name: notification
+    mail:
+      host: smtp.mail.ru
+      port: 465
+      username: ${SPRING_MAIL_USERNAME}
+      password: ${SPRING_MAIL_PASSWORD}
+      protocol: smtp
+      properties:
+        mail.smtp.auth: true
+        mail.smtp.ssl.enable: true
+
+    kafka:
+      bootstrap-servers: localhost:9094
+
+      consumer:
+        group-id: notification-group
+        auto-offset-reset: earliest
+
+  app:
+    kafka:
+      topic: notification.message.in
+
+  debug: true
