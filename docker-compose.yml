@@ -1,11 +1,15 @@
+version: '3.8'
 services:
-  app:
+  notification-app:
     build: ./notification-impl
+    container_name: notification-app
     ports:
       - "9002:8070"
     extra_hosts:
       - "host.docker.internal:host-gateway"
     environment:
-      SPRING_KAFKA_BOOTSTRAP_SERVERS: host.docker.internal:9094
-      SPRING_MAIL_USERNAME: ${SPRING_MAIL_USERNAME}
-      SPRING_MAIL_PASSWORD: ${SPRING_MAIL_PASSWORD}
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: "${KAFKA_SERVERS}"
+      SPRING_MAIL_USERNAME: "${SPRING_MAIL_USERNAME}"
+      SPRING_MAIL_PASSWORD: "${SPRING_MAIL_PASSWORD}"
+      APP_KAFKA_TOPIC: "${NOTIFICATION_TOPIC}"
+      DEBUG: "${APP_DEBUG}"
